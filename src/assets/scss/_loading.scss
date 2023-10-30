@@ -1,0 +1,34 @@
+.loadingSk {
+  width: 100%;
+  height: 40px !important;
+  background-image: linear-gradient(
+    to right,
+    #d9d9d9 0%,
+    rgba(0, 0, 0, 0.07) 20%,
+    #d9d9d9 40%,
+    #d9d9d9 100%
+  );
+  animation: loadingSk 7s linear infinite;
+  background-size: 450px 400px;
+
+  animation-delay: 1s;
+
+  ::before {
+    content: '' !important;
+  }
+  ::after {
+    content: '' !important;
+  }
+  * {
+    display: none !important;
+  }
+}
+
+@keyframes loadingSk {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}

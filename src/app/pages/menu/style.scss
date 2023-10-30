@@ -1,0 +1,141 @@
+.list-style-none {
+  list-style: none;
+}
+.item-col {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.tree {
+  position: relative;
+  background: white;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  padding-inline-start: 0;
+
+  span {
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    color: #a8a8a8;
+  }
+
+  i.bx {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    color: #a8a8a8;
+  }
+
+  .fa-folder-open,
+  .fa-folder {
+    color: #007bff;
+  }
+
+  .fa-html5 {
+    color: #f21f10;
+  }
+
+  ul {
+    padding-left: 15px;
+    list-style: none;
+
+    li {
+      position: relative;
+      // padding-top: 5px;
+      // padding-bottom: 10px;
+      padding-left: 20px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      user-select: none;
+
+      .col-item {
+        .title {
+          outline: none;
+        }
+        .title::-webkit-details-marker {
+          display: none;
+        }
+
+        &[open] > .title i:before {
+          content: '\f07c';
+        }
+
+        &[disabled] > .title {
+          cursor: not-allowed;
+
+          & i:before {
+            content: '\f65d';
+            color: #7f96ae;
+          }
+        }
+      }
+
+      &:before {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: 20px;
+        height: 1px;
+        margin: auto;
+        content: '';
+        background-color: #666;
+      }
+
+      &:after {
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        width: 1px;
+        height: 100%;
+        content: '';
+        background-color: #666;
+      }
+
+      &:last-child:after {
+        height: 26px;
+        border: none;
+      }
+      &:nth-last-child(odd) {
+        // height: 26px;
+        // background-color: #007bff;
+
+        div {
+          border-bottom: 1px solid #e9ebec;
+
+          // border-bottom: 0 !important;
+        }
+      }
+      &:nth-last-child(even) {
+        // height: 26px;
+        // background-color: #007bff;
+
+        div {
+          border-top: 1px solid #e9ebec;
+
+          border-top: 0;
+        }
+      }
+      &:nth-last-child(1) {
+        // height: 26px;
+        // background-color: #007bff;
+        // border-bottom: 1px solid #e9ebec !important;
+
+        div {
+          border-top: 0 !important;
+          // border-bottom: 1px solid #e9ebec !important;
+        }
+      }
+    }
+
+    li {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
