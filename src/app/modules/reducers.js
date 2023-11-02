@@ -39,6 +39,9 @@ import { modulProfile } from './Profile';
 import { modulAuth, modulLogout } from './Auth';
 import { modulMyaccount } from './Myaccount';
 
+// outside of system
+import { modulRoom, modulCategoryRoom } from './Room';
+
 const rootReducer = combineReducers({
   // public
   Layout,
@@ -79,6 +82,10 @@ const rootReducer = combineReducers({
   modulAuth,
   modulMyaccount,
   modulLogout,
+
+  // Outside of system
+  modulCategoryRoom,
+  modulRoom,
 });
 
 export default rootReducer;

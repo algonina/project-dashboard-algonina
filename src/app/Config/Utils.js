@@ -47,6 +47,17 @@ export const optionsTypeInput = [
   { value: 'radio', label: 'Radio' },
 ];
 
+export const optionStatusContent = [
+  {
+    value: '1',
+    label: 'Publish',
+  },
+  {
+    value: '0',
+    label: 'Draft / Unpublish',
+  },
+];
+
 export const convertStatus = (value = '') => {
   var status = 'UNCONFIRMED / PENDING';
   switch (value) {

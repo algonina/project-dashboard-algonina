@@ -12,6 +12,10 @@ import MenuPage from '../pages/Menu/IndexPage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import ContentPage from '../pages/Content/ContentPage';
 
+// outside of system
+
+import CategoryPage from '../pages/CategoryRoom/IndexPage';
+
 const ownroutes = [
   { path: '/typeuser', component: TypeuserPage },
   { path: '/users', component: UserPage },
@@ -22,6 +26,9 @@ const ownroutes = [
   { path: '/menu', component: MenuPage },
   { path: '/profile', component: ProfilePage },
   { path: '/content', component: ContentPage },
+
+  // outside of system
+  { path: '/category', component: CategoryPage },
 ];
 
 export { ownroutes };

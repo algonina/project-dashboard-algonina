@@ -19,15 +19,25 @@ import BreadCrumb from '../../../vendor/Components/Common/BreadCrumb';
 // import FeaturedNFT from './FeaturedNFT';
 // import RecentNFTs from './RecentNFTs';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import CountUp from 'react-countup/build/CountUp';
 import avatar1 from '../../../vendor/assets/images/users/avatar-1.jpg';
 import Can from '../../components/Helper/Can';
+import { __openModal } from '../../modules/Modal';
+import FormAddRoom from '../Room/FormAddRoom';
+import { actGetDataCategory, actGetDataRoom } from '../../modules/Room';
+import FromEdit from '../Room/FormEdit';
+import moment from 'moment';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const DashboardNFT = () => {
   const { dataProfile } = useSelector(({ modulProfile }) => ({
     dataProfile: modulProfile.data,
   }));
+
+  const [rooms, setRooms] = useState([]);
+
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     fullname: '',
@@ -41,6 +51,33 @@ const DashboardNFT = () => {
       setData(dataProfile);
     }
   }, [dataProfile]);
+
+  const { statusCategory } = useSelector(({ modulCategoryRoom }) => ({
+    statusCategory: modulCategoryRoom.status,
+  }));
+
+  const { statusRoom, dataRoom } = useSelector(({ modulRoom }) => ({
+    statusRoom: modulRoom.status,
+    dataRoom: modulRoom.data,
+  }));
+
+  useEffect(() => {
+    if (statusRoom === 'default') {
+      dispatch(actGetDataRoom());
+    }
+  }, [statusRoom]);
+
+  useEffect(() => {
+    if (statusCategory === 'default') {
+      dispatch(actGetDataCategory());
+    }
+  }, [statusCategory]);
+
+  useEffect(() => {
+    if (dataRoom.length) {
+      setRooms(dataRoom);
+    }
+  }, [statusRoom]);
 
   document.title = 'Dashboard - Algonina';
   const cards = [
@@ -66,6 +103,10 @@ const DashboardNFT = () => {
     'yarn',
     'dart',
   ];
+
+  const onEdit = (rows) => {
+    dispatch(__openModal({ modal: 'MODAL_EDIT_ROOM', data: rows, open: true }));
+  };
   return (
     <React.Fragment>
       <div className='page-content bg-white mb-0'>
@@ -100,6 +141,9 @@ const DashboardNFT = () => {
           <RecentNFTs /> */}
         </Container>
 
+        <FormAddRoom />
+        <FromEdit />
+
         <Container fluid className=''>
           <Container className='py-4'>
             <div className='d-flex align-items-center mb-4 py-2 '>
@@ -122,17 +166,19 @@ const DashboardNFT = () => {
                   <i className='bx bx-group text-muted align-middle fs-16'></i>
                 </Button>
                 <Button
+                  disabled={statusCategory === 'loading'}
                   type='button'
                   color='success'
                   className='btn btn-label px-2 fs-14 shadow-none border-success'
                   size='sm'
+                  onClick={() => dispatch(__openModal({ modal: 'MODAL_ADD_ROOM', open: true }))}
                 >
                   <i className=' bx bx-plus align-middle fs-16 me-1'></i> New Content
                 </Button>
               </div>
             </div>
             <Row>
-              {(cards || []).map((item, key) => (
+              {rooms.map((item, key) => (
                 <Col md='4' key={key} className=''>
                   <Card className='border shadow-none'>
                     <CardBody>
@@ -145,7 +191,9 @@ const DashboardNFT = () => {
                           </DropdownToggle>
                           <DropdownMenu className='dropdown-menu dropdown-menu-end'>
                             <DropdownItem href='#'> Details </DropdownItem>
-                            <DropdownItem href='#'> Cancel </DropdownItem>
+                            <DropdownItem href='#' onClick={() => onEdit(item)}>
+                              Edit
+                            </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
                       </div>
@@ -154,16 +202,20 @@ const DashboardNFT = () => {
                           className='d-flex align-items-center align-items-center justify-content-center text-center rounded-circle bg-light'
                           style={{ width: '50px', height: '50px' }}
                         >
-                          <span className={`icon-${item} fs-24`} />
+                          <span className={`${item.category_icon} fs-24`} />
                         </div>
 
                         {/* <h6 className='ms-2 mb-0 fs-14'>{item.label}</h6> */}
                       </div>
                       <Row className='align-items-end g-0'>
                         <Col xs={12}>
-                          <h5 className='mb-1 mt-4 mb-1'>{item}</h5>
+                          <h5 className='mb-1 mt-4 mb-1'>
+                            <Link className='text-dark' to={`/room/${item.room_slug}`}>
+                              {item.room_title}
+                            </Link>
+                          </h5>
                           <p className={'fs-11 mb-0 text-muted'}>
-                            <em>Last Update 12 Jan 2023</em>
+                            <em>Last Update {moment(item.updated_at).format('DD MMM YYYY H:m')}</em>
                           </p>
                         </Col>
                       </Row>

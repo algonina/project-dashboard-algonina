@@ -1,8 +1,10 @@
 import { CONNECTION } from '../../config/Connections';
 import { CONFIG_ } from '../../config/Config';
+import { successnotify } from '../../components/ToasNotif/Toast';
+import { __openModal } from '../Modal';
 
-var get = '';
-var post = '';
+var get = '/rooms';
+var post = '/rooms';
 export const actGetDataRoom = () => {
   return (dispatch) => {
     let config = CONFIG_({ url: get, method: 'GET' });
@@ -33,9 +35,11 @@ export const actPostDataRoom = (params) => {
     dispatch({ type: 'LOADING_ROOM_ROOM' });
     CONNECTION(config)
       .then((response) => {
-        const { status } = response;
+        const { status, message } = response;
         if (status === 201) {
-          return dispatch({ type: 'SUCCESS_ROOM_ROOM', message: 'Success post data' });
+          successnotify(message);
+          dispatch(__openModal({ modal: 'MODAL_ADD_ROOM', open: false }));
+          return dispatch(actGetDataRoom());
         }
         return dispatch({ type: 'ERROR_ROOM_ROOM', message: 'failed' });
       })
@@ -53,9 +57,11 @@ export const actUpdateDataRoom = (params) => {
     dispatch({ type: 'LOADING_ROOM_ROOM' });
     CONNECTION(config)
       .then((response) => {
-        const { status } = response;
-        if (status === 200) {
-          return dispatch({ type: 'SUCCESS_ROOM_ROOM', message: 'Success put data' });
+        const { status, message } = response;
+        if (status === 201) {
+          successnotify(message);
+          dispatch(__openModal({ modal: 'MODAL_EDIT_ROOM', open: false }));
+          return dispatch(actGetDataRoom());
         }
         return dispatch({ type: 'ERROR_ROOM_ROOM', message: 'failed' });
       })
