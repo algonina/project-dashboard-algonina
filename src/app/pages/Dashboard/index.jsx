@@ -210,7 +210,7 @@ const DashboardNFT = () => {
                       <Row className='align-items-end g-0'>
                         <Col xs={12}>
                           <h5 className='mb-1 mt-4 mb-1'>
-                            <Link className='text-dark' to={`/room/${item.room_slug}`}>
+                            <Link className='text-dark' to={`/room/${item.room_slug}/${item.code}`}>
                               {item.room_title}
                             </Link>
                           </h5>

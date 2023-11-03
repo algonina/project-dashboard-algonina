@@ -4,6 +4,7 @@ import { Badge, Button, Row, Col } from 'reactstrap';
 
 import PropTypes from 'prop-types';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+
 const BreadCrumb = ({ title, pageTitle, canvasTitle, canvasComponent }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(0);
@@ -30,8 +31,9 @@ const BreadCrumb = ({ title, pageTitle, canvasTitle, canvasComponent }) => {
       <Row>
         <Col xs={12}>
           <div className='page-title-box d-sm-flex align-items-center justify-content-between'>
-            <h4 className='mb-sm-0'>{title}</h4>
-
+            <div className='d-flex align-items-center gap-2'>
+              <span className='icon-laravel'></span> <h4 className='mb-sm-0'>{title}</h4>
+            </div>
             <div className='page-title-right'>
               <ol className='breadcrumb m-0 align-items-center'>
                 {/* <li className="breadcrumb-item"><Link to="#">{pageTitle}</Link></li> */}
@@ -72,6 +74,7 @@ BreadCrumb.propTypes = {
   title: PropTypes.string,
   pageTitle: PropTypes.string,
   canvasTitle: PropTypes.string,
+  icon: PropTypes.string,
   canvasComponent: PropTypes.any,
 };
 
@@ -79,6 +82,7 @@ BreadCrumb.defaultProps = {
   title: '',
   pageTitle: '',
   canvasTitle: 'Page Documentation',
+  icon: '',
   canvasComponent: <>I will not close if you click outside of me.</>,
 };
 

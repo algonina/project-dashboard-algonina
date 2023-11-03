@@ -76,12 +76,17 @@ export const actDetailDataRoom = (params) => {
   return (dispatch) => {
     const { id } = params;
     let config = CONFIG_({ url: post + '/' + id, method: 'GET' });
-    dispatch({ type: 'LOADING_ROOM_ROOM' });
+    dispatch({ type: 'LOADING_ROOM_ROOM', id: id });
     CONNECTION(config)
       .then((response) => {
-        const { status } = response;
+        const { status, data } = response;
         if (status === 200) {
-          return dispatch({ type: 'SUCCESS_ROOM_ROOM', message: 'Success get data' });
+          return dispatch({
+            type: 'DETAIL_ROOM_ROOM',
+            message: 'Success get data',
+            id: id,
+            data: data,
+          });
         }
         return dispatch({ type: 'ERROR_ROOM_ROOM', message: 'failed' });
       })

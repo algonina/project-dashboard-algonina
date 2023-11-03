@@ -3,6 +3,7 @@ const defaultState = {
   data: [],
   code: 500,
   message: '',
+  detail: {},
 };
 
 let response = {};
@@ -18,10 +19,22 @@ const Room_lib = (state = defaultState, action = {}) => {
       };
 
       break;
+    case 'DETAIL_ROOM_ROOM':
+      response = {
+        ...state,
+        id: action.id || '',
+        data: action.data ? action.data : {},
+        code: action.code ? action.code : 500,
+        status: 'success',
+        message: action.message ? action.message : '',
+      };
+
+      break;
     case 'LOADING_ROOM_ROOM':
       response = {
         ...state,
         status: 'loading',
+        id: action.id || '',
       };
       break;
     case 'ERROR_ROOM_ROOM':

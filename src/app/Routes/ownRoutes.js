@@ -11,6 +11,7 @@ import MenuPage from '../pages/Menu/IndexPage';
 
 import ProfilePage from '../pages/Profile/ProfilePage';
 import ContentPage from '../pages/Content/ContentPage';
+import DetailRoom from '../pages/Room/DetailRoom';
 
 // outside of system
 
@@ -20,7 +21,7 @@ const ownroutes = [
   { path: '/typeuser', component: TypeuserPage },
   { path: '/users', component: UserPage },
   { path: '/typesetting', component: TypeSettingPage },
-  { path: '/typeuser/:id', component: DetailTypeuserPage },
+  { path: '/typeuser/:id/', component: DetailTypeuserPage },
   { path: '/modul', component: SchemaPage },
   { path: '/settings', component: SettingPage },
   { path: '/menu', component: MenuPage },
@@ -29,6 +30,7 @@ const ownroutes = [
 
   // outside of system
   { path: '/category', component: CategoryPage },
+  { path: '/room/:slug/:id', component: DetailRoom },
 ];
 
 export { ownroutes };
