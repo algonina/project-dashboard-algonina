@@ -1,7 +1,7 @@
-import TypeuserPage from '../pages/Typeuser/IndexPage';
+import TypeuserPage from '../pages/typeuser/IndexPage';
 
 import UserPage from '../pages/User/IndexPage';
-import DetailTypeuserPage from '../pages/Typeuser/DetailPage';
+import DetailTypeuserPage from '../pages/typeuser/DetailPage';
 
 import TypeSettingPage from '../pages/TypeSetting/IndexPage';
 
