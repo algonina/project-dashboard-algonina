@@ -3,11 +3,15 @@
 @import 'datePicker';
 @import 'button';
 @import 'react-toastify/dist/ReactToastify.css';
+@import 'scrollbar';
 
 .auth-page-wrapper {
   // background: linear-gradient(to right, darken($primary, 6%), $primary);
   // background-color: red;
   background-image: url('../img/bg.png');
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
   // opacity: 0.9;
 }
 td {
@@ -16,6 +20,11 @@ td {
 
 .fs-32 {
   font-size: 32pt;
+}
+
+.main-content,
+.page-content {
+  min-height: 100vh !important;
 }
 
 .rounded-circle {

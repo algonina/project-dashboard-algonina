@@ -4,12 +4,13 @@ const defaultState = {
   code: 500,
   message: '',
   detail: {},
+  id: '',
 };
 
 let response = {};
-const Room_lib = (state = defaultState, action = {}) => {
+const Content_lib = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case 'SUCCESS_ROOM_ROOM':
+    case 'SUCCESS_CONTENT_ROOM':
       response = {
         ...state,
         data: action.data ? action.data : {},
@@ -19,25 +20,25 @@ const Room_lib = (state = defaultState, action = {}) => {
       };
 
       break;
-    case 'DETAIL_ROOM_ROOM':
+    case 'DETAIL_CONTENT_ROOM':
       response = {
         ...state,
-        id: action.id || '',
         detail: action.data ? action.data : {},
         code: action.code ? action.code : 500,
+        id: action.id ? action.id : '',
         status: 'success',
         message: action.message ? action.message : '',
       };
 
       break;
-    case 'LOADING_ROOM_ROOM':
+    case 'LOADING_CONTENT_ROOM':
       response = {
         ...state,
         status: 'loading',
-        id: action.id || '',
+        id: action.id ? action.id : '',
       };
       break;
-    case 'ERROR_ROOM_ROOM':
+    case 'ERROR_CONTENT_ROOM':
       response = {
         ...state,
         status: 'error',
@@ -54,4 +55,4 @@ const Room_lib = (state = defaultState, action = {}) => {
   return response;
 };
 
-export default Room_lib;
+export default Content_lib;

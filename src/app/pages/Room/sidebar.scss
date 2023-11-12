@@ -1,0 +1,26 @@
+.email-menu-sidebar,
+.email-menu-sidebar-scroll {
+  background-color: #f2f2f7;
+}
+
+.email-menu-sidebar {
+  div {
+    div {
+      background-color: #f2f2f7;
+    }
+  }
+}
+
+.link-sidebar {
+  &.active {
+    background-color: #ffff;
+    span {
+      color: #2d65cd !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  &:hover {
+    background-color: #fff;
+  }
+}

@@ -31,6 +31,7 @@ const ownroutes = [
   // outside of system
   { path: '/category', component: CategoryPage },
   { path: '/room/:slug/:id', component: DetailRoom },
+  { path: '/room/:slug/:id/:contentid', component: DetailRoom },
 ];
 
 export { ownroutes };

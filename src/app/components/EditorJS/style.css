@@ -1,0 +1,109 @@
+.editor {
+  background: #fff;
+  padding-bottom: 10px;
+  height: auto;
+  overflow: none;
+}
+
+#editorjs-container {
+  /* background-color: #f9f9f9; */
+  padding: 20px 30px;
+  /* margin-bottom: 20px; */
+}
+.codex-editor__redactor {
+  padding-bottom: 50px !important;
+}
+.cdx-notify {
+  padding: 20px;
+}
+.ce-toolbar__content,
+.ce-block__content {
+  max-width: unset;
+}
+
+.ce-block {
+  z-index: 0 !important;
+}
+
+.editor-title {
+  font-weight: 800;
+  font-size: 40px;
+  border: none;
+  display: block;
+  width: 100%;
+  color: #495057;
+  overflow: hidden;
+  resize: none;
+  padding: 0;
+}
+
+.editor-description {
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  display: block;
+  width: 100%;
+
+  overflow: hidden;
+  resize: none;
+  padding: 0;
+}
+
+.ce-toolbar__content,
+.ce-block__content {
+  width: 86% !important;
+}
+.form-title {
+  width: 83%;
+}
+
+.cdx-block {
+  padding: 0.5em 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ce-header {
+  /* padding: 10px 0 !important; */
+  font-weight: bold;
+}
+
+.ce-toolbar__actions {
+  position: absolute;
+  right: 100% !important;
+
+  display: flex;
+  /* top: 50%; */
+  /* padding-right: 5px; */
+  /* padding: 0.6em 0 3px; */
+  /* bottom: 50%; */
+}
+
+.ce-code__textarea {
+}
+.ce-rawtool__textarea {
+  color: #000 !important;
+  background-color: #f2f2f7 !important;
+  font-size: 14px !important;
+}
+.ce-rawtool__textarea {
+  min-height: 50px !important;
+}
+
+.codeBoxSelectPreview {
+  position: relative !important;
+}
+
+.cdx-notifies {
+  position: fixed;
+  z-index: 2;
+  bottom: 20px;
+  left: 85% !important;
+}
+
+.cdx-notify__cross {
+  display: none !important;
+}
+.colorPlugin.ce-inline-tool {
+  width: 40px !important;
+}

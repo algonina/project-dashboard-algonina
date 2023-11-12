@@ -118,10 +118,7 @@ const Layout = (props) => {
           onChangeLayoutMode={onChangeLayoutMode}
         />
         <Sidebar layoutType={layoutType} />
-        <div className='main-content'>
-          {props.children}
-          <Footer />
-        </div>
+        <div className='main-content'>{props.children}</div>
       </div>
       <RightSidebar />
     </React.Fragment>
@@ -133,3 +130,4 @@ Layout.propTypes = {
 };
 
 export default withRouter(Layout);
+ 

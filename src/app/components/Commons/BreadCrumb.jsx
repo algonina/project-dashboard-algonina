@@ -5,7 +5,7 @@ import { Badge, Button, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-const BreadCrumb = ({ title, pageTitle, canvasTitle, canvasComponent }) => {
+const BreadCrumb = ({ title, pageTitle, canvasTitle, canvasComponent, icon }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(0);
   const handleKeyPress = useCallback(
@@ -28,11 +28,12 @@ const BreadCrumb = ({ title, pageTitle, canvasTitle, canvasComponent }) => {
   }, [handleKeyPress]);
   return (
     <React.Fragment>
-      <Row>
+      <Row className=''>
         <Col xs={12}>
-          <div className='page-title-box d-sm-flex align-items-center justify-content-between'>
+          <div className='page-title-box d-sm-flex align-items-center justify-content-between mt-0 shadow-none mb-0 border-0'>
             <div className='d-flex align-items-center gap-2'>
-              <span className='icon-laravel'></span> <h4 className='mb-sm-0'>{title}</h4>
+              <span className={`${icon} fs-22`}></span>{' '}
+              <h3 className='mb-sm-0 mb-0 fw-bold text-uppercase'>{title}</h3>
             </div>
             <div className='page-title-right'>
               <ol className='breadcrumb m-0 align-items-center'>

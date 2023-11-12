@@ -18,7 +18,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FeatherIcon from 'feather-icons-react';
 
-import './style.css';
 import classnames from 'classnames';
 
 import SimpleBar from 'simplebar-react';
@@ -27,8 +26,8 @@ import InputEmojiWithRef from 'react-input-emoji';
 import { EDITOR_JS_TOOLS } from '../../components/EditorJS/EditorJs';
 
 import Sidebar from './Sidebar';
-import { createReactEditorJS } from 'react-editor-js';
-const ReactEditorJS = createReactEditorJS();
+// import { createReactEditorJS } from 'react-editor-js';
+// const ReactEditorJS = createReactEditorJS();
 
 // Initial Data
 

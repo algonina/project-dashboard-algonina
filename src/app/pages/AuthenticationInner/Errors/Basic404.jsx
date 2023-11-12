@@ -16,7 +16,7 @@ const Basic404 = () => {
             className='auth-page-content d-flex justify-content-center align-content-center align-items-center'
             style={{ height: '100vh' }}
           >
-            <Container className=' border'>
+            <Container className=''>
               <Row className=''>
                 <Col lg={12}>
                   <div className='text-center pt-4'>

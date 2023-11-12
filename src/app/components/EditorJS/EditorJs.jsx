@@ -27,6 +27,8 @@ import AlignmentTuneTool from 'editorjs-text-alignment-blocktune';
 import ImageTool from '@editorjs/image';
 import Warning from '@editorjs/warning';
 import Quote from '@editorjs/quote';
+import './style.css';
+
 export const EDITOR_JS_TOOLS = {
   paragraph: {
     class: Paragraph,
@@ -122,38 +124,40 @@ export const EDITOR_JS_TOOLS = {
   },
 };
 
-const EditorJs = ({ data, onChange, editorblock }) => {
+const EditorJs = ({ data, onChange, editorblock, readOnly }) => {
   const ref = useRef();
+  console.log(data);
   useEffect(() => {
     //Initialize editorjs if we don't have a reference
+    ref.current === null;
 
-    if (!ref.current) {
-      const editor = new EditorJS({
-        holder: editorblock,
-        placeholder: 'Entery content here...',
-        tools: { ...EDITOR_JS_TOOLS },
-        data: data,
-        readOnly: false,
-        shortcut: 'CMD+SHIFT+H',
-        async onChange(api, event) {
-          const data = await api.saver.save();
-          console.log(data);
-          onChange(data);
-        },
-        onReady: () => {
-          new Undo({ editor });
-        },
-      });
-
-      ref.current = editor;
-    }
+    const editor = new EditorJS({
+      holder: editorblock,
+      placeholder: 'Entery content here...',
+      tools: { ...EDITOR_JS_TOOLS },
+      data: data,
+      readOnly: false,
+      onReady: () => {
+        ref.current = editor;
+        new Undo({ editor });
+      },
+      shortcut: 'CMD+SHIFT+H',
+      async onChange(api, event) {
+        const data = await api.saver.save();
+        console.log(data);
+        onChange(data);
+      },
+    });
 
     //Add a return function to handle cleanup
     return () => {
       if (ref.current && ref.current.destroy) {
+        ref.current.destroy();
+        // ref?.current?.destroy();
+        ref.current === null;
       }
     };
-  }, [ref]);
+  }, [data]);
 
   return <div className='' id={editorblock} />;
 };

@@ -56,13 +56,14 @@ const DashboardNFT = () => {
     statusCategory: modulCategoryRoom.status,
   }));
 
-  const { statusRoom, dataRoom } = useSelector(({ modulRoom }) => ({
+  const { statusRoom, dataRoom, idRoom } = useSelector(({ modulRoom }) => ({
     statusRoom: modulRoom.status,
     dataRoom: modulRoom.data,
+    idRoom: modulRoom.id,
   }));
 
   useEffect(() => {
-    if (statusRoom === 'default') {
+    if (statusRoom === 'default' || idRoom !== '') {
       dispatch(actGetDataRoom());
     }
   }, [statusRoom]);
@@ -109,10 +110,10 @@ const DashboardNFT = () => {
   };
   return (
     <React.Fragment>
-      <div className='page-content bg-white mb-0'>
-        <Container fluid className='bg-white border-bottom'>
+      <div className='page-content bg-white mb-0 border pb-5'>
+        <Container fluid className='bg-white border-bottom bg-white '>
           <BreadCrumb title='Dashboard' pageTitle='Dashboard' />
-          <Container className='py-4 my-4'>
+          <Container className='py-4 my-4 bg-white'>
             <div className='d-flex align-items-center py-3'>
               <div className='avatar-lg flex-shrink-0 me-3'>
                 <img
@@ -144,8 +145,8 @@ const DashboardNFT = () => {
         <FormAddRoom />
         <FromEdit />
 
-        <Container fluid className=''>
-          <Container className='py-4'>
+        <Container className='pb-4 bg-white'>
+          <Container className='py-4 '>
             <div className='d-flex align-items-center mb-4 py-2 '>
               <h4 className='mb-0 flex-grow-1 font-weight-bold'>My Started</h4>
               <div className='flex-shrink-0'>

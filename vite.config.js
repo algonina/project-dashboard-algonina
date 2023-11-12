@@ -5,13 +5,13 @@ import fs from 'fs/promises';
 import envCompatible from 'vite-plugin-env-compatible';
 import EnvironmentPlugin from 'vite-plugin-environment';
 import path from 'path';
+import vitePluginRequire from 'vite-plugin-require';
 
 export default defineConfig({
   server: {
     host: 'localhost',
     port: 3000,
     strictPort: true,
-    // open: '/public/index.html',
   },
   resolve: {
     alias: {
@@ -42,6 +42,7 @@ export default defineConfig({
     EnvironmentPlugin('all', {
       prefix: 'REACT_APP',
     }),
+    vitePluginRequire.default(),
   ],
   base: '/',
 });
