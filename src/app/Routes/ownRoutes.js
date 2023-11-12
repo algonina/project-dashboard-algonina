@@ -7,7 +7,7 @@ import TypeSettingPage from '../pages/TypeSetting/IndexPage';
 
 import SchemaPage from '../pages/Schema/IndexPage';
 import SettingPage from '../pages/Setting/IndexPage';
-import MenuPage from '../pages/Menu/IndexPage';
+import MenuPage from '../pages/menu/IndexPage';
 
 import ProfilePage from '../pages/Profile/ProfilePage';
 import ContentPage from '../pages/Content/ContentPage';
