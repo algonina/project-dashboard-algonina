@@ -1,5 +1,5 @@
 import { CONNECTION } from '../../Config/Connections';
-import { CONFIG_ } from '../../config/Config';
+import { CONFIG_ } from '../../Config/Config';
 import { successnotify, warningnotify } from '../../components/ToasNotif/Toast';
 import { __openModal } from '../Modal';
 
