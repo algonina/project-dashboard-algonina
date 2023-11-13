@@ -15,7 +15,7 @@ import mathTex from 'editorjs-math';
 import SimpleImage from '@editorjs/simple-image';
 import editorjsCodeflask from '@calumk/editorjs-codeflask';
 import CodeBox from '@bomdi/codebox';
-// import CodeTool from '@rxpm/editor-js-code';
+import CodeToolJSCode from '@rxpm/editor-js-code';
 import RawEditor from '@editorjs/raw';
 import Alert from 'editorjs-alert';
 import ColorPlugin from 'editorjs-text-color-plugin';
@@ -118,7 +118,23 @@ export const EDITOR_JS_TOOLS = {
     class: Alert,
     inlineToolbar: true,
   },
+  code: CodeBox,
+  codeTool: CodeTool,
   codeBox: RawEditor,
+  CodeToolJSCode: {
+    class: CodeToolJSCode,
+    config: {
+      modes: {
+        js: 'JavaScript',
+        py: 'Python',
+        go: 'Go',
+        cpp: 'C++',
+        cs: 'C#',
+        md: 'Markdown',
+      },
+      defaultMode: 'go',
+    },
+  },
   math: {
     class: mathTex, // for CDN: window.MathTexe
   },
@@ -126,7 +142,6 @@ export const EDITOR_JS_TOOLS = {
 
 const EditorJs = ({ data, onChange, editorblock, readOnly }) => {
   const ref = useRef();
-  console.log(data);
   useEffect(() => {
     //Initialize editorjs if we don't have a reference
     ref.current === null;
@@ -144,7 +159,6 @@ const EditorJs = ({ data, onChange, editorblock, readOnly }) => {
       shortcut: 'CMD+SHIFT+H',
       async onChange(api, event) {
         const data = await api.saver.save();
-        console.log(data);
         onChange(data);
       },
     });

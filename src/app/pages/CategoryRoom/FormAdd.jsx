@@ -35,7 +35,6 @@ const FormAdd = () => {
    */
   const modulCategoryRoom = useSelector((state) => state.modulCategoryRoom);
   const { status } = modulCategoryRoom;
-  console.log(modulCategoryRoom);
   /**
    * Initial fields and validate with react-form-input-validation
    */
@@ -49,7 +48,6 @@ const FormAdd = () => {
       icon: Yup.string().required(),
     }),
     onSubmit: (values) => {
-      console.log(values);
       /**
        * Method used to submit form
        */
@@ -62,8 +60,6 @@ const FormAdd = () => {
    */
 
   const { errors, values } = validation;
-
-  console.log(values);
 
   return (
     <Modal isOpen={MODAL_ADD_CATEGORY}>

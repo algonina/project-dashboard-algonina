@@ -35,7 +35,6 @@ const Sidebar = (props) => {
   const { contentid } = useParams();
   const modulContentRoom = useSelector(({ modulContentRoom }) => modulContentRoom);
 
-  console.log(idRoom);
   return (
     <div className='h-100 w-100'>
       {statusRoom !== 'loading' || idRoom === id ? (
