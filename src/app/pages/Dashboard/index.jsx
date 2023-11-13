@@ -195,6 +195,17 @@ const DashboardNFT = () => {
                             <DropdownItem href='#' onClick={() => onEdit(item)}>
                               Edit
                             </DropdownItem>
+                            <div className='dropdown-divider'></div>
+
+                            <DropdownItem
+                              className='text-danger'
+                              onClick={() =>
+                                handleDeleteContent({ id: contentid, room_code: idRoom })
+                              }
+                            >
+                              <i className='mdi  mdi-alert-circle-outline fs-16 align-middle me-1'></i>
+                              <span className='align-middle'>Delete</span>{' '}
+                            </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
                       </div>
@@ -224,6 +235,35 @@ const DashboardNFT = () => {
                   </Card>
                 </Col>
               ))}
+
+              {statusRoom === 'loading' && rooms.length === 0 ? (
+                <Col md='4' className=''>
+                  <Card className='border shadow-none'>
+                    <CardBody>
+                      <div className='float-end'></div>
+                      <div className='d-flex align-items-center'>
+                        <div
+                          className='d-flex align-items-center avatar-skeleton align-items-center justify-content-center text-center rounded-circle bg-light'
+                          style={{ width: '50px', height: '50px' }}
+                        >
+                          <span className={`fs-24`} />
+                        </div>
+
+                        {/* <h6 className='ms-2 mb-0 fs-14'>{item.label}</h6> */}
+                      </div>
+                      <Row className='align-items-end g-0'>
+                        <Col xs={12}>
+                          <h5 className='mb-1 mb-1 skeleton-loader'>
+                            <Link className='text-dark' to={`#`}></Link>
+                          </h5>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                  </Card>
+                </Col>
+              ) : (
+                ''
+              )}
             </Row>
           </Container>
         </Container>

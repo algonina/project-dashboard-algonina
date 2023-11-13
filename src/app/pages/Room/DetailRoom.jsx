@@ -74,8 +74,9 @@ const DetailRoom = (props) => {
     }
   }, [id, idRoom]);
 
-  const { detailRoom } = useSelector(({ modulRoom }) => ({
+  const { detailRoom, statusRoom } = useSelector(({ modulRoom }) => ({
     detailRoom: modulRoom.detail,
+    statusRoom: modulRoom.status,
   }));
 
   useEffect(() => {
@@ -170,6 +171,8 @@ const DetailRoom = (props) => {
             description: 'Short Description',
             header: '0',
             status: '0',
+            room_code: id,
+            content_code: idContent ? idContent : '',
             blocks: {
               time: new Date(),
             },
@@ -226,7 +229,13 @@ const DetailRoom = (props) => {
             className='w-100 bg-white border-left-1 overflow-hidden p-0 border'
             style={{ marginLeft: '17%', minHeight: '100vh' }}
           >
-            <div className='border-bottom'>
+            <div
+              className={
+                idRoom !== id || statusRoom === 'loading'
+                  ? 'border-bottom skeleton-loader'
+                  : 'border-bottom'
+              }
+            >
               <Container fluid className='postition-fixed'>
                 <div className='w-84 mx-auto py-2 border-0'>
                   <BreadCrumb title={data.room_title} icon={data.category_icon} />
@@ -319,10 +328,10 @@ const DetailRoom = (props) => {
                       </div>
                     </CardHeader>
                     <Card className='shadow-none w-100 h-100 pt-3 border-0'>
-                      <div className='editor '>
-                        <div className=''>
-                          <div className='m-auto form-title'>
-                            <div>
+                      <div className='editor'>
+                        <div>
+                          <div className='mx-auto form-title mb-3 '>
+                            <div className={statusContent === 'loading' ? 'skeleton-loader' : ''}>
                               <div>
                                 <div className='d-flex justify-content-between align-items-center mb-2'>
                                   {dataContent.status === '0' ? (
@@ -360,11 +369,18 @@ const DetailRoom = (props) => {
                               </div>
                             </div>
                           </div>
-                          <div className='px-4 mt-3'>
+                          <div
+                            className={
+                              statusContent === 'loading'
+                                ? 'skeleton-loader px-4 mt-3 w-83 m-auto'
+                                : 'px-4 mt-3 '
+                            }
+                            style={{ marginBottom: '50px' }}
+                          >
                             <EditorJs
                               data={detailContent.content_blocks}
                               onChange={setBlocks}
-                              editorblock={'editor'}
+                              editorblock={'editors'}
                             />
                           </div>
                           {/* <ReactEditorJS defaultBlock={blocks} tools={EDITOR_JS_TOOLS} /> */}

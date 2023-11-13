@@ -1,0 +1,56 @@
+.skeleton-loader {
+  //   width: 100%;
+  height: auto;
+  min-height: 50px;
+  background: linear-gradient(
+    90deg,
+    $loader-background-color 25%,
+    $loader-highlight-color 50%,
+    $loader-background-color 75%
+  ) !important;
+  background-size: 200% 100%;
+  animation: loading 2s infinite ease-in-out;
+  //   border-radius: 8px;
+  //   margin-bottom: 20px;
+  &::after {
+    content: '';
+  }
+  &::before {
+    content: '';
+  }
+  div {
+    display: none;
+  }
+}
+.avatar-skeleton {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(
+    90deg,
+    $loader-background-color 25%,
+    $loader-highlight-color 50%,
+    $loader-background-color 75%
+  ) !important;
+  background-size: 200% 100%;
+  animation: loading 2s infinite ease-in-out;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  &::after {
+    content: '';
+  }
+  &::before {
+    content: '';
+  }
+  * {
+    display: none;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

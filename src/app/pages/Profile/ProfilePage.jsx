@@ -22,6 +22,8 @@ import FormUpdateUsername from './FormUpdateUsername';
 import { actPostDataMyaccount, actUpdateDataMyaccount } from '../../modules/Myaccount';
 import { useFormik } from 'formik';
 
+import * as pkg from '../../../../package.json';
+
 import * as Yup from 'yup';
 
 const ProfilePage = () => {
@@ -187,6 +189,10 @@ const ProfilePage = () => {
               </div>
             </CardBody>
           </Card>
+
+          <div className='text-center'>
+            <p className='fw-bold mb-0 text-muted'>Version {pkg.version}</p>
+          </div>
         </Container>
       </Container>
     </div>

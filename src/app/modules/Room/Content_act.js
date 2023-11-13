@@ -31,15 +31,19 @@ export const actGetDataContent = () => {
 
 export const actPostDataContent = (params) => {
   return (dispatch) => {
-    const { room } = params;
+    const { room_code, content_code } = params;
     let config = CONFIG_({ url: post, data: params, method: 'POST' });
-    dispatch({ type: 'LOADING_CONTENT_ROOM' });
+    dispatch({ type: 'LOADING_CONTENT_ROOM', id: content_code });
     CONNECTION(config)
       .then((response) => {
         const { status } = response;
         if (status === 201) {
-          dispatch({ type: 'SUCCESS_CONTENT_ROOM', message: 'Success post data' });
-          return dispatch(actUpdateDataRoom({ id: room }));
+          dispatch({
+            type: 'SUCCESS_CONTENT_ROOM',
+            message: 'Success post data',
+            id: content_code,
+          });
+          return dispatch(actDetailDataRoom({ id: room_code }, false));
         }
         return dispatch({ type: 'ERROR_CONTENT_ROOM', message: 'failed' });
       })
@@ -60,7 +64,7 @@ export const actUpdateDataContent = (params) => {
         const { status } = response;
         if (status === 200) {
           successnotify('Content has been updated !');
-          dispatch(actDetailDataRoom({ id: room_code }));
+          dispatch(actDetailDataRoom({ id: room_code }, false));
           return dispatch(actDetailDataContent({ id: code }));
         }
         return dispatch({ type: 'ERROR_CONTENT_ROOM', message: 'failed' });
@@ -82,7 +86,7 @@ export const actPublishDataContent = (params) => {
         const { status } = response;
         if (status === 200) {
           successnotify('Content has been updated !');
-          dispatch(actDetailDataRoom({ id: room_code }));
+          dispatch(actDetailDataRoom({ id: room_code }, false));
           return dispatch(actDetailDataContent({ id: id }));
         }
         return dispatch({ type: 'ERROR_CONTENT_ROOM', message: 'failed' });
@@ -129,7 +133,7 @@ export const actDeleteDataContent = (params) => {
         const { status } = response;
         if (status === 200) {
           successnotify('Content has been delete!');
-          dispatch(actDetailDataRoom({ id: room_code }));
+          dispatch(actDetailDataRoom({ id: room_code }, false));
 
           return dispatch({
             type: 'DETAIL_CONTENT_ROOM',

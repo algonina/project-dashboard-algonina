@@ -35,7 +35,7 @@ import logoLight from '../../../assets/img/logo.png';
 import { facebook, google } from '../../../config';
 import { actPostDataAuth } from '../../modules/Auth';
 //import images
-
+import * as pkg from '../../../../package.json';
 const Login = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({
@@ -61,8 +61,8 @@ const Login = (props) => {
     enableReinitialize: true,
 
     initialValues: {
-      username: userLogin.email || 'user@themesbrand.com' || '',
-      password: userLogin.password || '12345678' || '',
+      username: userLogin.email,
+      password: userLogin.password,
     },
     validationSchema: Yup.object({
       username: Yup.string().required('Please Enter Your Email'),
@@ -203,7 +203,7 @@ const Login = (props) => {
                               </FormFeedback>
                             ) : null}
                             <button
-                              className='btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted'
+                              className='btn btn-link shadow-none position-absolute end-0 top-0 text-decoration-none text-muted'
                               type='button'
                               id='password-addon'
                               aria-label='button'
@@ -270,10 +270,10 @@ const Login = (props) => {
                               onSuccess={googleResponse}
                               onFailure={() => {}}
                             /> */}
-                            <Button color='dark' className='btn-icon'>
+                            <Button color='dark' className='btn-icon me-2' type='button'>
                               <i className='ri-github-fill fs-16'></i>
-                            </Button>{' '}
-                            <Button color='info' className='btn-icon'>
+                            </Button>
+                            <Button color='info' className='btn-icon' type='button'>
                               <i className='ri-twitter-fill fs-16'></i>
                             </Button>
                           </div>
@@ -283,17 +283,19 @@ const Login = (props) => {
                   </CardBody>
                 </Card>
 
-                <div className='mt-4 text-center'>
+                <div className='mt-4 text-center d-none'>
                   <p className='mb-0'>
-                    Don't have an account ?{' '}
+                    Don't have an account ?
                     <Link
                       to='/register'
                       className='fw-semibold text-primary text-decoration-underline'
                     >
-                      {' '}
-                      Signup{' '}
-                    </Link>{' '}
+                      Signup
+                    </Link>
                   </p>
+                </div>
+                <div className='mt-4 text-center'>
+                  <p className='mb-0 text-muted'>Algonina @{pkg.version} </p>
                 </div>
               </Col>
             </Row>

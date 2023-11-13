@@ -1,9 +1,11 @@
+@import 'vars';
 @import 'loading';
 @import 'table';
 @import 'datePicker';
 @import 'button';
 @import 'react-toastify/dist/ReactToastify.css';
 @import 'scrollbar';
+@import 'skeleton';
 
 .auth-page-wrapper {
   // background: linear-gradient(to right, darken($primary, 6%), $primary);

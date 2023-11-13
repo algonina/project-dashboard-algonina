@@ -3,7 +3,7 @@ import React from 'react';
 //import Scss
 import 'react-toastify/dist/ReactToastify.css';
 
-import './vendor/assets/scss/themes.scss';
+import './vendor/assets/css/themes.css';
 import './assets/scss/style.scss';
 import './assets/fonts/icomoon/style.css';
 //imoprt Route

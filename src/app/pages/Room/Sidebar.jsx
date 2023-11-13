@@ -38,7 +38,7 @@ const Sidebar = (props) => {
   console.log(idRoom);
   return (
     <div className='h-100 w-100'>
-      {statusRoom === 'success' && idRoom === id ? (
+      {statusRoom !== 'loading' || idRoom === id ? (
         <SimpleBar className='email-menu-sidebar-scroll h-100' data-simplebar>
           <div className='mail-list fs-15 pl-0 pr-0'>
             {data.map((item, i) => {

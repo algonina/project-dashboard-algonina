@@ -1,6 +1,6 @@
 import { CONNECTION } from '../../Config/Connections';
 import { CONFIG_ } from '../../Config/Config';
-import { successnotify } from '../../components/ToasNotif/Toast';
+import { successnotify, warningnotify } from '../../components/ToasNotif/Toast';
 import { __openModal } from '../Modal';
 
 var get = '/rooms';
@@ -72,11 +72,13 @@ export const actUpdateDataRoom = (params) => {
   };
 };
 
-export const actDetailDataRoom = (params) => {
+export const actDetailDataRoom = (params, withLoading = true) => {
   return (dispatch) => {
     const { id } = params;
     let config = CONFIG_({ url: post + '/' + id, method: 'GET' });
-    dispatch({ type: 'LOADING_ROOM_ROOM', id: id });
+    if (withLoading) {
+      dispatch({ type: 'LOADING_ROOM_ROOM', id: id });
+    }
     CONNECTION(config)
       .then((response) => {
         const { status, data } = response;
@@ -88,6 +90,8 @@ export const actDetailDataRoom = (params) => {
             data: data,
           });
         }
+
+        warningnotify('Something wrong please reload this page!');
         return dispatch({ type: 'ERROR_ROOM_ROOM', message: 'failed' });
       })
       .catch((response) => {
