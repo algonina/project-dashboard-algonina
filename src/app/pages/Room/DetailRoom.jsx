@@ -17,7 +17,7 @@ import {
 import FeatherIcon from 'feather-icons-react';
 import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { actDetailDataRoom } from '../../modules/Room';
+import { actDetailDataRoom, actPostDataMark } from '../../modules/Room';
 import { useState } from 'react';
 import {
   actDeleteDataContent,
@@ -79,6 +79,8 @@ const DetailRoom = (props) => {
     statusRoom: modulRoom.status,
   }));
 
+  const [mark, setMark] = useState(false);
+
   useEffect(() => {
     if (Object.keys(detailRoom)) {
       setData(detailRoom);
@@ -108,7 +110,7 @@ const DetailRoom = (props) => {
         header: detailContent.is_header,
         status: detailContent.content_status,
       });
-
+      setMark(detailContent.mark);
       setBlocks(detailContent.content_blocks);
     }
   }, [contentid, idContent, detailContent]);
@@ -121,6 +123,12 @@ const DetailRoom = (props) => {
       ...dataContent,
       [target.name]: target.value,
     });
+  };
+
+  const handleMarkContent = () => {
+    setMark(!mark);
+
+    dispath(actPostDataMark({ content: dataContent._id }));
   };
 
   function adjustHeight(ref) {
@@ -251,7 +259,7 @@ const DetailRoom = (props) => {
                         style={{ width: '84%' }}
                         className='mx-auto d-flex justify-content-between align-items-center'
                       >
-                        <div className='form-check form-switch d-flex align-items-center gap-2'>
+                        <div className='form-check form-switch d-flex align-items-center gap-2 d-none'>
                           <Input
                             className='form-check-input'
                             type='checkbox'
@@ -266,9 +274,28 @@ const DetailRoom = (props) => {
                             Preview Mode
                           </Label>
                         </div>
-                        <div className='d-flex gap-2'>
-                          <Button color='warning'>
-                            <span className='mdi mdi-lock mr-2'></span>Lock
+                        <div>
+                          <a className='text-muted' target='_blank' href='#'>
+                            <i className='mdi mdi-eye text-muted fs-12 align-middle me-1'></i>View
+                            Content
+                          </a>
+                        </div>
+                        <div className='d-flex gap-2 align-items-center'>
+                          <Button
+                            color='transparent'
+                            className='btn-icon shadow-none'
+                            size='sm'
+                            title='Marking the content'
+                            disabled={
+                              statusContent === 'loading' || Object.keys(blocks).length === 0
+                            }
+                            onClick={handleMarkContent}
+                          >
+                            <span
+                              className={
+                                mark ? ' ri-star-fill fs-18 text-warning' : 'ri-star-line fs-18'
+                              }
+                            ></span>
                           </Button>
                           <Button
                             type='button'

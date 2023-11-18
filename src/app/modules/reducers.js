@@ -40,7 +40,7 @@ import { modulAuth, modulLogout } from './Auth';
 import { modulMyaccount } from './Myaccount';
 
 // outside of system
-import { modulRoom, modulCategoryRoom, modulContentRoom } from './Room';
+import { modulRoom, modulCategoryRoom, modulContentRoom, modulMarkContent } from './Room';
 
 const rootReducer = combineReducers({
   // public
@@ -87,6 +87,7 @@ const rootReducer = combineReducers({
   modulCategoryRoom,
   modulRoom,
   modulContentRoom,
+  modulMarkContent,
 });
 
 export default rootReducer;

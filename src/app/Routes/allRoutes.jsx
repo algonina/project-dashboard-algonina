@@ -111,7 +111,7 @@ import DashboardPage from '../pages/Dashboard';
 // import UiHighlight from '../../vendor/pages/AdvanceUi/UiHighlight/UiHighlight';
 
 // // Widgets
-// import Widgets from '../../vendor/pages/Widgets/Index';
+import Widgets from '../../vendor/pages/Widgets/Index';
 
 // //Forms
 // import BasicElements from '../../vendor/pages/Forms/BasicElements/BasicElements';
@@ -347,7 +347,7 @@ const routes = [
   // { path: '/advance-ui-highlight', component: UiHighlight },
 
   // // Widgets
-  // { path: '/widgets', component: Widgets },
+  { path: '/widgets', component: Widgets },
 
   // Forms
   // { path: '/forms-elements', component: BasicElements },

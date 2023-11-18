@@ -8,6 +8,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  ListGroupItem,
   Row,
   UncontrolledDropdown,
 } from 'reactstrap';
@@ -25,14 +26,28 @@ import avatar1 from '../../../vendor/assets/images/users/avatar-1.jpg';
 import Can from '../../components/Helper/Can';
 import { __openModal } from '../../modules/Modal';
 import FormAddRoom from '../Room/FormAddRoom';
-import { actGetDataCategory, actGetDataRoom } from '../../modules/Room';
+import {
+  actDeleteDataRoom,
+  actGetDataCategory,
+  actGetDataMark,
+  actGetDataRoom,
+} from '../../modules/Room';
 import FromEdit from '../Room/FormEdit';
 import moment from 'moment';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { widgetsActivities, widgetsTasks } from '../../../vendor/common/data/index';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 
 const DashboardNFT = () => {
   const { dataProfile } = useSelector(({ modulProfile }) => ({
     dataProfile: modulProfile.data,
+  }));
+
+  const [bookmarks, setBookmarks] = useState([]);
+
+  const { dataMark, statusMark } = useSelector(({ modulMarkContent }) => ({
+    dataMark: modulMarkContent.data,
+    statusMark: modulMarkContent.status,
   }));
 
   const [rooms, setRooms] = useState([]);
@@ -63,6 +78,11 @@ const DashboardNFT = () => {
   }));
 
   useEffect(() => {
+    if (statusMark === 'default') {
+      dispatch(actGetDataMark());
+    }
+  });
+  useEffect(() => {
     if (statusRoom === 'default' || idRoom !== '') {
       dispatch(actGetDataRoom());
     }
@@ -79,6 +99,12 @@ const DashboardNFT = () => {
       setRooms(dataRoom);
     }
   }, [statusRoom]);
+
+  useEffect(() => {
+    if (dataMark.length) {
+      setBookmarks(dataMark);
+    }
+  }, [dataMark]);
 
   document.title = 'Dashboard - Algonina';
   const cards = [
@@ -108,8 +134,25 @@ const DashboardNFT = () => {
   const onEdit = (rows) => {
     dispatch(__openModal({ modal: 'MODAL_EDIT_ROOM', data: rows, open: true }));
   };
+
+  const handleDeleteContent = (params) => {
+    confirmDialog({
+      message: 'Do you want to delete the room?',
+      header: 'Delete Room',
+      icon: 'pi pi-info-circle',
+      acceptClassName: 'btn-sm btn-default',
+      rejectClassName: 'btn-sm me-2 btn-danger',
+      draggable: false,
+      accept: () => dispatch(actDeleteDataRoom(params)),
+
+      reject: () => {},
+    });
+  };
+
   return (
     <React.Fragment>
+      <ConfirmDialog />
+
       <div className='page-content bg-white mb-0 border pb-5'>
         <Container fluid className='bg-white border-bottom bg-white '>
           <BreadCrumb title='Dashboard' pageTitle='Dashboard' />
@@ -146,9 +189,9 @@ const DashboardNFT = () => {
         <FromEdit />
 
         <Container className='pb-4 bg-white'>
-          <Container className='py-4 '>
+          <Container className='py-4'>
             <div className='d-flex align-items-center mb-4 py-2 '>
-              <h4 className='mb-0 flex-grow-1 font-weight-bold'>My Started</h4>
+              <h4 className='mb-0 flex-grow-1 font-weight-bold'>My Dashboard</h4>
               <div className='flex-shrink-0'>
                 <Button
                   type='button'
@@ -174,10 +217,44 @@ const DashboardNFT = () => {
                   size='sm'
                   onClick={() => dispatch(__openModal({ modal: 'MODAL_ADD_ROOM', open: true }))}
                 >
-                  <i className=' bx bx-plus align-middle fs-16 me-1'></i> New Content
+                  <i className=' bx bx-plus align-middle fs-16 me-1'></i> New Room
                 </Button>
               </div>
             </div>
+            {bookmarks.length > 0 ? (
+              <React.Fragment>
+                <h6 className='fw-bold d-flex align-content-center'>
+                  <i className='ri-star-fill text-warning me-2'></i> Bookmark
+                </h6>
+                <Row className=''>
+                  {bookmarks.map((item, key) => (
+                    <Col md='4' className='mb-2' key={key}>
+                      <ListGroupItem className='px-3 rounded' key={key}>
+                        <Row className='align-items-center g-3'>
+                          <Col className='col'>
+                            <h5 className='text-muted mt-0 mb-1 fs-13'>{item.room_title}</h5>
+                            <Link
+                              to={`/room/${item.room_slug}/${item.room_code}/${item.content_code}`}
+                              className='text-reset fs-14 mb-0 fw-semibold'
+                            >
+                              {item.content_title}
+                            </Link>
+                          </Col>
+                        </Row>
+                      </ListGroupItem>
+                    </Col>
+                  ))}
+                </Row>
+
+                <div className='dropdown-divider pb-3'></div>
+              </React.Fragment>
+            ) : (
+              ''
+            )}
+
+            <h6 className='fw-bold d-flex align-content-center'>
+              <i className='mdi mdi-google-classroom mr-2'></i> My Rooms
+            </h6>
             <Row>
               {rooms.map((item, key) => (
                 <Col md='4' key={key} className=''>
@@ -199,9 +276,7 @@ const DashboardNFT = () => {
 
                             <DropdownItem
                               className='text-danger'
-                              onClick={() =>
-                                handleDeleteContent({ id: contentid, room_code: idRoom })
-                              }
+                              onClick={() => handleDeleteContent({ id: item.code })}
                             >
                               <i className='mdi  mdi-alert-circle-outline fs-16 align-middle me-1'></i>
                               <span className='align-middle'>Delete</span>{' '}

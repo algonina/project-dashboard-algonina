@@ -108,10 +108,13 @@ export const actDeleteDataRoom = (params) => {
     dispatch({ type: 'LOADING_ROOM_ROOM' });
     CONNECTION(config)
       .then((response) => {
-        const { status } = response;
-        if (status === 200) {
-          return dispatch({ type: 'SUCCESS_ROOM_ROOM', message: 'Success get data' });
+        const { status, message } = response;
+        if (status === 201) {
+          successnotify(message);
+          return dispatch(actGetDataRoom());
         }
+        warningnotify('Something wrong please reload this page!');
+
         return dispatch({ type: 'ERROR_ROOM_ROOM', message: 'failed' });
       })
       .catch((response) => {
