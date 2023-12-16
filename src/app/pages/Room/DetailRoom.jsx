@@ -6,12 +6,14 @@ import {
   Button,
   Card,
   CardHeader,
+  Col,
   Container,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Input,
   Label,
+  Row,
   UncontrolledButtonDropdown,
 } from 'reactstrap';
 import FeatherIcon from 'feather-icons-react';
@@ -244,7 +246,7 @@ const DetailRoom = (props) => {
                   : 'border-bottom'
               }
             >
-              <Container fluid className='postition-fixed'>
+              <Container fluid>
                 <div className='w-84 mx-auto py-2 border-0'>
                   <BreadCrumb title={data.room_title} icon={data.category_icon} />
                 </div>
@@ -354,66 +356,75 @@ const DetailRoom = (props) => {
                         </div>
                       </div>
                     </CardHeader>
-                    <Card className='shadow-none w-100 h-100 pt-3 border-0'>
-                      <div className='editor'>
-                        <div>
-                          <div className='mx-auto form-title mb-3 '>
-                            <div className={statusContent === 'loading' ? 'skeleton-loader' : ''}>
-                              <div>
-                                <div className='d-flex justify-content-between align-items-center mb-2'>
-                                  {dataContent.status === '0' ? (
-                                    <Badge color='warning' className='fs-10'>
-                                      Draft
-                                    </Badge>
-                                  ) : (
-                                    <Badge color='success' className='fs-10'>
-                                      Publish
-                                    </Badge>
-                                  )}
-                                  <p className='mb-0 mt-0 fs-12 text-muted'>
-                                    Last Update at :{' '}
-                                    {moment(dataContent.updated_at).format('DD MMM YYYY H:mm')}
-                                  </p>
+                    <Row>
+                      <Col md='12'>
+                        <Card
+                          className='shadow-none w-100 h-100 pt-3'
+                          style={{ position: 'relative', margin: 'auto', maxWidth: '85%' }}
+                        >
+                          <div className='editor'>
+                            <div>
+                              <div className='mx-auto form-title mb-3 '>
+                                <div
+                                  className={statusContent === 'loading' ? 'skeleton-loader' : ''}
+                                >
+                                  <div>
+                                    <div className='d-flex justify-content-between align-items-center mb-2'>
+                                      {dataContent.status === '0' ? (
+                                        <Badge color='warning' className='fs-10'>
+                                          Draft
+                                        </Badge>
+                                      ) : (
+                                        <Badge color='success' className='fs-10'>
+                                          Publish
+                                        </Badge>
+                                      )}
+                                      <p className='mb-0 mt-0 fs-12 text-muted'>
+                                        Last Update at :{' '}
+                                        {moment(dataContent.updated_at).format('DD MMM YYYY H:mm')}
+                                      </p>
+                                    </div>
+                                    <textarea
+                                      className='editor-title mb-2 p-0 '
+                                      rows={1}
+                                      placeholder='Content Title'
+                                      value={dataContent.title}
+                                      onChange={(e) => handleMessageChange(e, textbox)}
+                                      name='title'
+                                      ref={textbox}
+                                    ></textarea>
+                                    <textarea
+                                      className='editor-description mb-1 p-0'
+                                      rows={1}
+                                      placeholder={'Page description ( optional )'}
+                                      onChange={(e) => handleMessageChange(e, textbox2)}
+                                      ref={textbox2}
+                                      name='description'
+                                      value={dataContent.description}
+                                    ></textarea>
+                                  </div>
                                 </div>
-                                <textarea
-                                  className='editor-title mb-2 p-0 '
-                                  rows={1}
-                                  placeholder='Content Title'
-                                  value={dataContent.title}
-                                  onChange={(e) => handleMessageChange(e, textbox)}
-                                  name='title'
-                                  ref={textbox}
-                                ></textarea>
-                                <textarea
-                                  className='editor-description mb-1 p-0'
-                                  rows={1}
-                                  placeholder={'Page description ( optional )'}
-                                  onChange={(e) => handleMessageChange(e, textbox2)}
-                                  ref={textbox2}
-                                  name='description'
-                                  value={dataContent.description}
-                                ></textarea>
                               </div>
+                              <div
+                                className={
+                                  statusContent === 'loading'
+                                    ? 'skeleton-loader px-4 mt-3 w-83 m-auto'
+                                    : 'px-4 mt-3 '
+                                }
+                                style={{ marginBottom: '50px' }}
+                              >
+                                <EditorJs
+                                  data={detailContent.content_blocks}
+                                  onChange={setBlocks}
+                                  editorblock={'editors'}
+                                />
+                              </div>
+                              {/* <ReactEditorJS defaultBlock={blocks} tools={EDITOR_JS_TOOLS} /> */}
                             </div>
                           </div>
-                          <div
-                            className={
-                              statusContent === 'loading'
-                                ? 'skeleton-loader px-4 mt-3 w-83 m-auto'
-                                : 'px-4 mt-3 '
-                            }
-                            style={{ marginBottom: '50px' }}
-                          >
-                            <EditorJs
-                              data={detailContent.content_blocks}
-                              onChange={setBlocks}
-                              editorblock={'editors'}
-                            />
-                          </div>
-                          {/* <ReactEditorJS defaultBlock={blocks} tools={EDITOR_JS_TOOLS} /> */}
-                        </div>
-                      </div>
-                    </Card>
+                        </Card>
+                      </Col>
+                    </Row>
                   </>
                 ) : (
                   <div

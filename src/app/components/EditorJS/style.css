@@ -107,3 +107,13 @@
 .colorPlugin.ce-inline-tool {
   width: 40px !important;
 }
+
+.codex-editor--narrow .ce-toolbox .ce-popover {
+  left: unset !important;
+  right: unset !important;
+}
+
+.codex-editor--narrow .ce-settings .ce-popover {
+  left: unset !important;
+  right: unset !important;
+}

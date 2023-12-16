@@ -27,8 +27,18 @@ import AlignmentTuneTool from 'editorjs-text-alignment-blocktune';
 import ImageTool from '@editorjs/image';
 import Warning from '@editorjs/warning';
 import Quote from '@editorjs/quote';
+// import Embed from '@editorjs/embed';
+import EditorJsColumns from '@calumk/editorjs-columns';
+
 import './style.css';
 
+const Embed = require('editorjs-youtube-embed');
+const MermaidTool = require('editorjs-mermaid');
+let column_tools = {
+  header: Header,
+  paragraph: Paragraph,
+  delimiter: Delimiter,
+};
 export const EDITOR_JS_TOOLS = {
   paragraph: {
     class: Paragraph,
@@ -118,6 +128,35 @@ export const EDITOR_JS_TOOLS = {
     class: Alert,
     inlineToolbar: true,
   },
+  columns: {
+    class: EditorJsColumns,
+    config: {
+      EditorJsLibrary: EditorJS,
+      tools: {
+        delimiter: Delimiter,
+        embed: {
+          class: Embed,
+          inlineToolbar: true,
+          config: {
+            services: {
+              youtube: true,
+              coub: true,
+            },
+          },
+        },
+      },
+    },
+  },
+  embed: {
+    class: Embed,
+    inlineToolbar: true,
+    config: {
+      services: {
+        youtube: true,
+        coub: true,
+      },
+    },
+  },
   code: CodeBox,
   codeTool: CodeTool,
   codeBox: RawEditor,
@@ -139,6 +178,8 @@ export const EDITOR_JS_TOOLS = {
     class: mathTex, // for CDN: window.MathTexe
   },
 };
+
+console.log(EDITOR_JS_TOOLS);
 
 const EditorJs = ({ data, onChange, editorblock, readOnly }) => {
   const ref = useRef();
